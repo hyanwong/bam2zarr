@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bam2zarr"
+version = "0.1.0"
+description = "Convert BAM reads into a VCF Zarr-compatible dataset where each read is a sample"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "bam2zarr contributors" }]
+dependencies = [
+  "numpy>=1.24",
+  "pysam>=0.22",
+  "xarray>=2024.1.0",
+  "zarr>=2.16",
+]
+
+[project.scripts]
+bam2zarr = "bam2zarr.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/hyanwong/bam2zarr"
+Repository = "https://github.com/hyanwong/bam2zarr"
+Issues = "https://github.com/hyanwong/bam2zarr/issues"
+
+[dependency-groups]
+dev = [
+  "pytest>=9.0",
+]
+tsinfer-compat = [
+  "tsinfer==0.5.1",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

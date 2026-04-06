@@ -1,0 +1,2 @@
+[console_scripts]
+bam2zarr = bam2zarr.cli:main

@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+src/bam2zarr/__init__.py
+src/bam2zarr/__main__.py
+src/bam2zarr/cli.py
+src/bam2zarr/converter.py
+src/bam2zarr.egg-info/PKG-INFO
+src/bam2zarr.egg-info/SOURCES.txt
+src/bam2zarr.egg-info/dependency_links.txt
+src/bam2zarr.egg-info/entry_points.txt
+src/bam2zarr.egg-info/requires.txt
+src/bam2zarr.egg-info/top_level.txt
+tests/test_cli.py
+tests/test_conversion.py
+tests/test_known_sites.py
+tests/test_smoke.py
