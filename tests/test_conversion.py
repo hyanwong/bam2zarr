@@ -91,9 +91,9 @@ def test_convert_bam_to_vcfzarr_discovers_reference_mismatch_sites(tmp_path: Pat
     assert ds["variant_allele"].values[0].tolist() == ["A", "C", "G"]
     assert ds["call_genotype"].values[0, :, 0].tolist() == [1, 2, 0]
     assert all(isinstance(entry, (bytes, bytearray)) for entry in ds["individuals_metadata"].values.tolist())
-    assert [
-        json.loads(entry)["QNAME"] for entry in ds["individuals_metadata"].values.tolist()
-    ] == ["read_c", "read_g", "read_ref"]
+    parsed_meta = [json.loads(entry) for entry in ds["individuals_metadata"].values.tolist()]
+    assert [m["QNAME"] for m in parsed_meta] == ["read_c", "read_g", "read_ref"]
+    assert all("POS" in m and "MAPQ" in m and "CIGAR" in m and "MD" in m for m in parsed_meta)
 
 
 def test_convert_bam_to_vcfzarr_accepts_known_sites_path(tmp_path: Path) -> None:

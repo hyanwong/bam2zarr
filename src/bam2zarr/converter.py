@@ -700,7 +700,15 @@ def convert_bam_to_vcfzarr(
             base_name = read.query_name or f"read_{len(sample_ids)}"
             sample_name = _unique_sample_name(base_name, sample_seen)
             sample_ids.append(sample_name)
-            individuals_metadata.append(json.dumps({"QNAME": base_name}).encode("utf-8"))
+            individuals_metadata.append(
+                json.dumps({
+                    "QNAME": base_name,
+                    "POS": read.reference_start + 1,
+                    "MAPQ": read.mapping_quality,
+                    "CIGAR": read.cigarstring,
+                    "MD": read.get_tag("MD") if read.has_tag("MD") else None,
+                }).encode("utf-8")
+            )
 
             query_sequence = read.query_sequence or ""
 
